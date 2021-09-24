@@ -161,7 +161,32 @@ if(DEFINED QT_LOCATION)
         endif()
     endif()
     set(CMAKE_PREFIX_PATH "${QT_LOCATION}")
-    find_package(Qt5 ${QT_VERSION} COMPONENTS Core Gui Widgets REQUIRED)
+
+    find_package(Qt5 ${QT_VERSION} COMPONENTS Core REQUIRED)
+    # find_package(Qt5 ${QT_VERSION} COMPONENTS Gui REQUIRED)
+    # find_package(Qt5 ${QT_VERSION} COMPONENTS Widgets REQUIRED)
+
+    # add_library(Qt5::Core SHARED IMPORTED)
+    # set_target_properties(Qt5::Core PROPERTIES
+    #    INTERFACE_INCLUDE_DIRECTORIES "${MAYA_BASE_DIR}/include/Qt"
+    #    IMPORTED_LOCATION "${MAYA_BASE_DIR}/lib/libQt5Core.so")
+    # set(Qt5Core_FOUND ON)
+
+    add_library(Qt5::Gui SHARED IMPORTED)
+    set_target_properties(Qt5::Gui PROPERTIES
+       INTERFACE_INCLUDE_DIRECTORIES "${MAYA_BASE_DIR}/include/Qt"
+       IMPORTED_LOCATION "${MAYA_BASE_DIR}/lib/libQt5Gui.so")
+    set(Qt5Gui_FOUND ON)
+
+    add_library(Qt5::Widgets SHARED IMPORTED)
+    set_target_properties(Qt5::Widgets PROPERTIES
+       INTERFACE_INCLUDE_DIRECTORIES "${MAYA_BASE_DIR}/include/Qt"
+       IMPORTED_LOCATION "${MAYA_BASE_DIR}/lib/libQt5Widgets.so")
+    set(Qt5Widgets_FOUND ON)
+
+    set(Qt5_FOUND ON)
+
+
     if(Qt5_FOUND)
         message(STATUS "Building with Qt features enabled.")
     endif()
