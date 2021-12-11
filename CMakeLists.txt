@@ -61,10 +61,12 @@ set(CMAKE_MODULE_PATH
 )
 
 # Use RUNPATH instead of RPATH for all shared libs, executables and modules on Linux
+if (0)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux") # IS_LINUX not yet defined
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--enable-new-dtags")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--enable-new-dtags")
     set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--enable-new-dtags")
+endif()
 endif()
 
 #------------------------------------------------------------------------------
